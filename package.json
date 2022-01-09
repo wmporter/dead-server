@@ -1,6 +1,6 @@
 {
-  "name": "live-server",
-  "version": "1.2.1",
+  "name": "live-server-2",
+  "version": "1.0.0",
   "description": "simple development http server with live reload capability",
   "keywords": [
     "front-end",
@@ -10,10 +10,10 @@
     "http",
     "cli"
   ],
-  "author": "Tapio Vierros",
+  "author": "Rimantas Belovas",
   "dependencies": {
-    "chokidar": "^2.0.4",
-    "colors": "latest",
+    "chokidar": "^3.5.2",
+    "colors": "1.4.0",
     "connect": "^3.6.6",
     "cors": "latest",
     "event-stream": "3.3.4",
@@ -27,22 +27,22 @@
     "serve-index": "^1.9.1"
   },
   "devDependencies": {
-    "eslint": "^5.9.0",
+    "eslint": "^8.6.0",
     "jshint": "^2.9.6",
-    "mocha": "^5.2.0",
+    "mocha": "^9.1.3",
     "supertest": "^3.3.0"
   },
   "scripts": {
-    "lint": "eslint live-server.js index.js",
-    "hint": "jshint live-server.js index.js",
+    "lint": "eslint live-server-2.js index.js",
+    "hint": "jshint live-server-2.js index.js",
     "test": "mocha test --exit && npm run lint"
   },
   "bin": {
-    "live-server": "./live-server.js"
+    "live-server-2": "./live-server-2.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tapio/live-server.git"
+    "url": "https://github.com/belauzas/live-server-2.git"
   },
   "engines": {
     "node": ">=0.10.0"

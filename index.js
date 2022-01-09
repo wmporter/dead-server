@@ -16,7 +16,7 @@ require('colors');
 
 var INJECTED_CODE = fs.readFileSync(path.join(__dirname, "injected.html"), "utf8");
 
-var LiveServer = {
+var DeadServer = {
 	server: null,
 	watcher: null,
 	logLevel: 2
@@ -65,7 +65,7 @@ function staticServer(root) {
 						break;
 					}
 				}
-				if (injectTag === null && LiveServer.logLevel >= 3) {
+				if (injectTag === null && DeadServer.logLevel >= 3) {
 					console.warn("Failed to inject refresh script!".yellow,
 						"Couldn't find any of the tags ", injectCandidates, "from", filepath);
 				}
@@ -129,14 +129,14 @@ function entryPoint(staticHandler, file) {
  * @param htpasswd {string} Path to htpasswd file to enable HTTP Basic authentication
  * @param middleware {array} Append middleware to stack, e.g. [function(req, res, next) { next(); }].
  */
-LiveServer.start = function (options) {
+DeadServer.start = function (options) {
 	options = options || {};
 	var host = options.host || '0.0.0.0';
 	var port = options.port !== undefined ? options.port : 8080; // 0 means random
 	var root = options.root || process.cwd();
 	var mount = options.mount || [];
 	var watchPaths = options.watch || [root];
-	LiveServer.logLevel = options.logLevel === undefined ? 2 : options.logLevel;
+	DeadServer.logLevel = options.logLevel === undefined ? 2 : options.logLevel;
 	var openPath = (options.open === undefined || options.open === true) ?
 		"" : ((options.open === null || options.open === false) ? null : options.open);
 	if (options.noBrowser) openPath = null; // Backwards compatibility with 0.7.0
@@ -168,12 +168,12 @@ LiveServer.start = function (options) {
 	var app = connect();
 
 	// Add logger. Level 2 logs only errors
-	if (LiveServer.logLevel === 2) {
+	if (DeadServer.logLevel === 2) {
 		app.use(logger('dev', {
 			skip: function (req, res) { return res.statusCode < 400; }
 		}));
 		// Level 2 or above logs all requests
-	} else if (LiveServer.logLevel > 2) {
+	} else if (DeadServer.logLevel > 2) {
 		app.use(logger('dev'));
 	}
 	if (options.spa) {
@@ -212,7 +212,7 @@ LiveServer.start = function (options) {
 		if (!options.watch) // Auto add mount paths to wathing but only if exclusive path option is not given
 			watchPaths.push(mountPath);
 		app.use(mountRule[0], staticServer(mountPath));
-		if (LiveServer.logLevel >= 1)
+		if (DeadServer.logLevel >= 1)
 			console.log('Mapping %s to "%s"', mountRule[0], mountPath);
 	});
 	proxy.forEach(function (proxyRule) {
@@ -220,7 +220,7 @@ LiveServer.start = function (options) {
 		proxyOpts.via = true;
 		proxyOpts.preserveHost = true;
 		app.use(proxyRule[0], require('proxy-middleware')(proxyOpts));
-		if (LiveServer.logLevel >= 1)
+		if (DeadServer.logLevel >= 1)
 			console.log('Mapping %s to "%s"', proxyRule[0], proxyRule[1]);
 	});
 	app.use(staticServerHandler) // Custom static server
@@ -250,13 +250,13 @@ LiveServer.start = function (options) {
 			}, 1000);
 		} else {
 			console.error(e.toString().red);
-			LiveServer.shutdown();
+			DeadServer.shutdown();
 		}
 	});
 
 	// Handle successful server
 	server.addListener('listening', function (/*e*/) {
-		LiveServer.server = server;
+		DeadServer.server = server;
 
 		var address = server.address();
 		var serveHost = address.address === "0.0.0.0" ? "127.0.0.1" : address.address;
@@ -266,7 +266,7 @@ LiveServer.start = function (options) {
 		var openURL = protocol + '://' + openHost + ':' + address.port;
 
 		var serveURLs = [serveURL];
-		if (LiveServer.logLevel > 2 && address.address === "0.0.0.0") {
+		if (DeadServer.logLevel > 2 && address.address === "0.0.0.0") {
 			var ifaces = os.networkInterfaces();
 			serveURLs = Object.keys(ifaces)
 				.map(function (iface) {
@@ -287,7 +287,7 @@ LiveServer.start = function (options) {
 		}
 
 		// Output
-		if (LiveServer.logLevel >= 1) {
+		if (DeadServer.logLevel >= 1) {
 			if (serveURL === openURL)
 				if (serveURLs.length === 1) {
 					console.log(("Serving \"%s\" at %s").green, root, serveURLs[0]);
@@ -353,13 +353,13 @@ LiveServer.start = function (options) {
 		ignored.push(options.ignorePattern);
 	}
 	// Setup file watcher
-	LiveServer.watcher = chokidar.watch(watchPaths, {
+	DeadServer.watcher = chokidar.watch(watchPaths, {
 		ignored: ignored,
 		ignoreInitial: true
 	});
 	function handleChange(changePath) {
 		var cssChange = path.extname(changePath) === ".css" && !noCssInject;
-		if (LiveServer.logLevel >= 1) {
+		if (DeadServer.logLevel >= 1) {
 			if (cssChange)
 				console.log("CSS change detected".magenta, changePath);
 			else console.log("Change detected".cyan, changePath);
@@ -369,14 +369,14 @@ LiveServer.start = function (options) {
 				ws.send(cssChange ? 'refreshcss' : 'reload');
 		});
 	}
-	LiveServer.watcher
+	DeadServer.watcher
 		.on("change", handleChange)
 		.on("add", handleChange)
 		.on("unlink", handleChange)
 		.on("addDir", handleChange)
 		.on("unlinkDir", handleChange)
 		.on("ready", function () {
-			if (LiveServer.logLevel >= 1)
+			if (DeadServer.logLevel >= 1)
 				console.log("Ready for changes".cyan);
 		})
 		.on("error", function (err) {
@@ -386,14 +386,14 @@ LiveServer.start = function (options) {
 	return server;
 };
 
-LiveServer.shutdown = function () {
-	var watcher = LiveServer.watcher;
+DeadServer.shutdown = function () {
+	var watcher = DeadServer.watcher;
 	if (watcher) {
 		watcher.close();
 	}
-	var server = LiveServer.server;
+	var server = DeadServer.server;
 	if (server)
 		server.close();
 };
 
-module.exports = LiveServer;
+module.exports = DeadServer;

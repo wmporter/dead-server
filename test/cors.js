@@ -1,15 +1,15 @@
 var request = require('supertest');
 var path = require('path');
-var liveServer = require('..').start({
+var deadServer = require('..').start({
 	root: path.join(__dirname, "data"),
 	port: 0,
 	open: false,
 	cors: true
 });
 
-describe('cors tests', function() {
-	it('should respond with appropriate header', function(done) {
-		request(liveServer)
+describe('cors tests', function () {
+	it('should respond with appropriate header', function (done) {
+		request(deadServer)
 			.get('/index.html')
 			.set('Origin', 'http://example.com')
 			.expect('Content-Type', 'text/html; charset=UTF-8')
@@ -17,8 +17,8 @@ describe('cors tests', function() {
 			.expect(/Hello world/i)
 			.expect(200, done);
 	});
-	it('should support preflighted requests', function(done) {
-		request(liveServer)
+	it('should support preflighted requests', function (done) {
+		request(deadServer)
 			.options('/index.html')
 			.set('Origin', 'http://example.com')
 			.set('Access-Control-Request-Method', 'POST')
@@ -28,8 +28,8 @@ describe('cors tests', function() {
 			.expect('Access-Control-Allow-Headers', 'X-PINGOTHER')
 			.expect(204, done);
 	});
-	it('should support requests with credentials', function(done) {
-		request(liveServer)
+	it('should support requests with credentials', function (done) {
+		request(deadServer)
 			.options('/index.html')
 			.set('Origin', 'http://example.com')
 			.set('Cookie', 'foo=bar')

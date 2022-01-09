@@ -2,7 +2,7 @@
 var path = require('path');
 var fs = require('fs');
 var assign = require('object-assign');
-var liveServer = require("./index");
+var deadServer = require("./index");
 
 var opts = {
 	host: process.env.IP,
@@ -152,7 +152,7 @@ for (var i = process.argv.length - 1; i >= 2; --i) {
 	}
 	else if (arg === "--test") {
 		// Hidden param for tests to exit automatically
-		setTimeout(liveServer.shutdown, 500);
+		setTimeout(deadServer.shutdown, 500);
 		process.argv.splice(i, 1);
 	}
 }
@@ -171,4 +171,4 @@ if (opts.ignore) {
 	});
 }
 
-liveServer.start(opts);
+deadServer.start(opts);

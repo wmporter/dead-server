@@ -1,5 +1,5 @@
 {
-  "name": "live-server-2",
+  "name": "dead-server",
   "version": "1.0.0",
   "description": "simple development http server with live reload capability",
   "keywords": [
@@ -33,16 +33,16 @@
     "supertest": "^3.3.0"
   },
   "scripts": {
-    "lint": "eslint live-server-2.js index.js",
-    "hint": "jshint live-server-2.js index.js",
+    "lint": "eslint dead-server.js index.js",
+    "hint": "jshint dead-server.js index.js",
     "test": "mocha test --exit && npm run lint"
   },
   "bin": {
-    "live-server-2": "./live-server-2.js"
+    "dead-server": "./dead-server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/belauzas/live-server-2.git"
+    "url": "https://github.com/belauzas/dead-server.git"
   },
   "engines": {
     "node": ">=0.10.0"

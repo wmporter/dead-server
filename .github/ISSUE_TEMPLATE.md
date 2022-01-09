@@ -1,11 +1,11 @@
-###### Before submitting an issue, please, see https://github.com/tapio/live-server-2#troubleshooting
+###### Before submitting an issue, please, see https://github.com/tapio/dead-server#troubleshooting
 
 ## Issue description
 
 ## Software details
 
--   Command line used for launching `live-server-2`:
+-   Command line used for launching `dead-server`:
 -   OS:
 -   Browser (if browser related):
 -   Node.js version:
--   `live-server-2` version:
+-   `dead-server` version:

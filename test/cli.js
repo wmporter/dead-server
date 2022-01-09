@@ -1,7 +1,7 @@
 var assert = require('assert');
 var path = require('path');
 var exec = require('child_process').execFile;
-var cmd = path.join(__dirname, "..", "live-server-2.js");
+var cmd = path.join(__dirname, "..", "dead-server.js");
 var opts = {
 	timeout: 2000,
 	maxBuffer: 1024
@@ -17,14 +17,14 @@ describe('command line usage', function () {
 	it('--version', function (done) {
 		exec_test(["--version"], function (error, stdout, stdin) {
 			assert(!error, error);
-			assert(stdout.indexOf("live-server-2") === 0, "version not found");
+			assert(stdout.indexOf("dead-server") === 0, "version not found");
 			done();
 		});
 	});
 	it('--help', function (done) {
 		exec_test(["--help"], function (error, stdout, stdin) {
 			assert(!error, error);
-			assert(stdout.indexOf("Usage: live-server-2") === 0, "usage not found");
+			assert(stdout.indexOf("Usage: dead-server") === 0, "usage not found");
 			done();
 		});
 	});

@@ -1,5 +1,5 @@
-[![view on npm](http://img.shields.io/npm/v/live-server-2.svg)](https://www.npmjs.org/package/live-server-2)
-[![npm module downloads per month](http://img.shields.io/npm/dm/live-server-2.svg)](https://www.npmjs.org/package/live-server-2)
+[![view on npm](http://img.shields.io/npm/v/dead-server.svg)](https://www.npmjs.org/package/dead-server)
+[![npm module downloads per month](http://img.shields.io/npm/dm/dead-server.svg)](https://www.npmjs.org/package/dead-server)
 
 # Live Server 2
 

@@ -3,4 +3,4 @@
 
 # Dead Server
 
-This is a quick fix (updated version) for an original ["Live Server"](https://www.npmjs.com/package/live-server) package. Original version doesn't seem be maintained, and while the was mayor braiking change ir the dependencies, I took to quick-fix it.
+This is a quick fix (updated version) for an original ["Live Server"](https://www.npmjs.com/package/live-server) package. Original version doesn't seem be maintained, and while there was a mayor braiking change ir the dependencies, I took to quick-fix it.

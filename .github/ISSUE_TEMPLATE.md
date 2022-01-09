@@ -1,4 +1,4 @@
-###### Before submitting an issue, please, see https://github.com/tapio/dead-server#troubleshooting
+###### Before submitting an issue, please, see https://github.com/belauzas/dead-server#troubleshooting
 
 ## Issue description
 

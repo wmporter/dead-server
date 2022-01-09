@@ -11,7 +11,7 @@ When implementing a new feature or a bugfix, consider these points:
 
 A few guiding principles: keep the app simple and small, focusing on what it's meant to provide: live reloading development web server. Avoid extra dependencies and the need to do configuration when possible and it makes sense. Minimize bloat.
 
-If you are adding a feature, think about if it could be an extenral middleware instead, possible bundled with `dead-server` in its `middleware` folder.
+If you are adding a feature, think about if it could be an external middleware instead, possible bundled with `dead-server` in its `middleware` folder.
 
 **New features should come with test cases!**
 
